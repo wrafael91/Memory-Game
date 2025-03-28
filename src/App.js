@@ -6,11 +6,11 @@ function App() {
   const [flipped, setFlipped] = useState([]);
   const [matched, setMatched] = useState([]);
   const [disabled, setDisabled] = useState(false);
+  // Nuevo estado para la puntuación
+  const [score, setScore] = useState(0);
 
-  // Array de emojis para las cartas
   const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
 
-  // Inicializar el juego
   const initializeGame = () => {
     const duplicatedEmojis = [...emojis, ...emojis]
       .sort(() => Math.random() - 0.5)
@@ -20,11 +20,11 @@ function App() {
     setFlipped([]);
     setMatched([]);
     setDisabled(false);
+    // Reiniciar la puntuación
+    setScore(0);
   };
 
-  // Manejar el clic en una carta
   const handleCardClick = (id) => {
-    // Aquí está la corrección: removimos 'card.id' y usamos solo 'id'
     if (disabled || flipped.includes(id) || matched.includes(id)) return;
 
     const newFlipped = [...flipped, id];
@@ -37,10 +37,14 @@ function App() {
       const secondCard = cards.find(card => card.id === secondId);
 
       if (firstCard.content === secondCard.content) {
+        // Sumar 10 puntos por encontrar un par
+        setScore(currentScore => currentScore + 10);
         setMatched([...matched, firstId, secondId]);
         setFlipped([]);
         setDisabled(false);
       } else {
+        // Restar 2 puntos por equivocarse
+        setScore(currentScore => Math.max(0, currentScore - 2));
         setTimeout(() => {
           setFlipped([]);
           setDisabled(false);
@@ -49,7 +53,6 @@ function App() {
     }
   };
 
-  // Inicializar el juego al cargar
   useEffect(() => {
     initializeGame();
   }, []);
@@ -57,6 +60,10 @@ function App() {
   return (
     <div className="game-container">
       <h1 className="title">Juego de Memoria</h1>
+      {/* Mostrar la puntuación */}
+      <div className="score-container">
+        <p className="score">Puntuación: {score}</p>
+      </div>
       <div className="grid">
         {cards.map(card => (
           <div
