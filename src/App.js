@@ -32,9 +32,9 @@ function App() {
 
   // Función para obtener el texto del botón según el estado del juego
   const getButtonText = () => {
-    if (!gameStarted) return "Iniciar Juego";
-    if (gameOver) return "Jugar de nuevo";
-    return "Reiniciar Juego";
+    if (!gameStarted) return "Start Game";
+    if (gameOver) return "Play again";
+    return "Restart game";
   };
 
   const handleCardClick = (id) => {
