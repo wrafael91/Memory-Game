@@ -24,6 +24,7 @@ function App() {
 
   // Manejar el clic en una carta
   const handleCardClick = (id) => {
+    // Aquí está la corrección: removimos 'card.id' y usamos solo 'id'
     if (disabled || flipped.includes(id) || matched.includes(id)) return;
 
     const newFlipped = [...flipped, id];
