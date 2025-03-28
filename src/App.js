@@ -101,16 +101,16 @@ function App() {
 
   return (
     <div className="game-container">
-      <h1 className="title">Juego de Memoria</h1>
+      <h1 className="title">Memory Game</h1>
       
       {/* Solo mostrar stats si el juego ha comenzado */}
       {gameStarted && (
         <div className="stats-container">
           <div className="score-container">
-            <p className="score">Puntuación: {score}</p>
+            <p className="score">Score: {score}</p>
           </div>
           <div className={`timer-container ${time <= 10 ? 'timer-warning' : ''}`}>
-            <p className="timer">Tiempo: {formatTime(time)}</p>
+            <p className="timer">Time: {formatTime(time)}</p>
           </div>
         </div>
       )}
@@ -118,18 +118,18 @@ function App() {
       {/* Mostrar mensaje de bienvenida si el juego no ha comenzado */}
       {!gameStarted && (
         <div className="welcome-message">
-          <p>¡Bienvenido al Juego de Memoria!</p>
-          <p>Encuentra todos los pares de cartas antes de que se acabe el tiempo.</p>
-          <p>Tienes 90 segundos para completar el desafío.</p>
+          <p>Welcome to the Memory Game!</p>
+          <p>Find all pairs of cards before time runs out.</p>
+          <p>You have 90 seconds to complete the challenge.</p>
         </div>
       )}
 
       {gameOver && (
         <div className="game-over-message">
           {matched.length === cards.length ? (
-            <p className="win-message">¡Felicitaciones! Has ganado con {score} puntos</p>
+            <p className="win-message">Congratulations! You've won with {score} points</p>
           ) : (
-            <p className="lose-message">¡Se acabó el tiempo! Puntuación final: {score}</p>
+            <p className="lose-message">Time's up! Final score: {score}</p>
           )}
         </div>
       )}
